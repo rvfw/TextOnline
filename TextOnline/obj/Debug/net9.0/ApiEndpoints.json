@@ -2,14 +2,14 @@
   {
     "ContainingType": "TextOnline.Controllers.AuthController",
     "Method": "Login",
-    "RelativePath": "api/Auth/login",
+    "RelativePath": "api/Auth/Login",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "login",
-        "Type": "Microsoft.AspNetCore.Identity.Data.LoginRequest",
+        "Type": "TextOnline.Dtos.LoginDto",
         "IsRequired": true
       }
     ],
@@ -18,14 +18,14 @@
   {
     "ContainingType": "TextOnline.Controllers.AuthController",
     "Method": "Register",
-    "RelativePath": "api/Auth/register",
+    "RelativePath": "api/Auth/Register",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "request",
-        "Type": "TextOnline.Controllers.RegisterRequest",
+        "Type": "TextOnline.Dtos.RegisterDto",
         "IsRequired": true
       }
     ],
@@ -33,12 +33,197 @@
   },
   {
     "ContainingType": "TextOnline.Controllers.RoomsController",
-    "Method": "GetUsers",
-    "RelativePath": "api/Rooms/AllUsers",
+    "Method": "GetRooms",
+    "RelativePath": "api/Rooms",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TextOnline.Controllers.RoomsController",
+    "Method": "GetRooms",
+    "RelativePath": "api/Rooms/{roomId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roomId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TextOnline.Controllers.RoomsController",
+    "Method": "GetTextBackup",
+    "RelativePath": "api/Rooms/{roomId}/Backup",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roomId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "version",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TextOnline.Controllers.RoomsController",
+    "Method": "DoTextBackup",
+    "RelativePath": "api/Rooms/{roomId}/Backup",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roomId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "version",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TextOnline.Controllers.RoomsController",
+    "Method": "DeleteRoom",
+    "RelativePath": "api/Rooms/{roomId}/Delete",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roomId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TextOnline.Controllers.RoomsController",
+    "Method": "EnterRoom",
+    "RelativePath": "api/Rooms/{roomId}/Enter",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roomId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "TextOnline.Dtos.EnterRoomDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TextOnline.Controllers.RoomsController",
+    "Method": "ExitRoom",
+    "RelativePath": "api/Rooms/{roomId}/Exit",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roomId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TextOnline.Controllers.RoomsController",
+    "Method": "GetRoomHistory",
+    "RelativePath": "api/Rooms/{roomId}/History",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roomId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TextOnline.Controllers.RoomsController",
+    "Method": "KickUser",
+    "RelativePath": "api/Rooms/{roomId}/Kick",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roomId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "kickedUserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TextOnline.Controllers.RoomsController",
+    "Method": "ChangeSettings",
+    "RelativePath": "api/Rooms/{roomId}/Settings",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roomId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "TextOnline.Dtos.CreateRoomDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TextOnline.Controllers.RoomsController",
+    "Method": "GetUsersInRoom",
+    "RelativePath": "api/Rooms/{roomId}/Users",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roomId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -51,104 +236,34 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "TextOnline.Controllers.RoomRequest",
+        "Type": "TextOnline.Dtos.CreateRoomDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "TextOnline.Controllers.RoomsController",
-    "Method": "DeleteRoom",
-    "RelativePath": "api/Rooms/Delete",
-    "HttpMethod": "DELETE",
+    "ContainingType": "TextOnline.Controllers.UsersController",
+    "Method": "GetUsers",
+    "RelativePath": "api/Users",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [
-      {
-        "Name": "request",
-        "Type": "TextOnline.Controllers.RoomRequest",
-        "IsRequired": true
-      }
-    ],
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "TextOnline.Controllers.RoomsController",
-    "Method": "EnterRoom",
-    "RelativePath": "api/Rooms/Enter",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "request",
-        "Type": "TextOnline.Controllers.RoomRequest",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "TextOnline.Controllers.RoomsController",
-    "Method": "ExitRoom",
-    "RelativePath": "api/Rooms/Exit",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "request",
-        "Type": "TextOnline.Controllers.RoomRequest",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "TextOnline.Controllers.RoomsController",
-    "Method": "GetRooms",
-    "RelativePath": "api/Rooms/Get",
+    "ContainingType": "TextOnline.Controllers.UsersController",
+    "Method": "GetRoomsByUser",
+    "RelativePath": "api/Users/{userId}/Rooms",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
-        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "TextOnline.Controllers.RoomsController",
-    "Method": "GetRoomHistory",
-    "RelativePath": "api/Rooms/History",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
+        "Name": "userId",
         "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "TextOnline.Controllers.RoomsController",
-    "Method": "GetUsersInRoom",
-    "RelativePath": "api/Rooms/Users",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []

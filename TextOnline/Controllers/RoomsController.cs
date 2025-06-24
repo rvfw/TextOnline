@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.IdentityModel.Tokens.Jwt;
+using TextOnline.Dtos;
+using TextOnline.Logic;
 using TextOnline.Models;
 
 namespace TextOnline.Controllers
@@ -14,69 +15,97 @@ namespace TextOnline.Controllers
         {
             _context = context;
         }
-        [HttpGet("Get")]
-        public IActionResult GetRooms([FromQuery] int? id)
+        [HttpGet]
+        public IActionResult GetRooms()
         {
-            if (id == null)
-                return Ok(_context.Rooms);
-            if (_context.Users.FirstOrDefault(x => x.Id == id) == null)
-                return BadRequest();
-            return Ok(_context.Rooms.Where(x => x.CreatorId == id));
+            return Ok(_context.Rooms);
         }
-        [HttpGet("AllUsers")]
-        public IActionResult GetUsers()
+        [HttpGet("{roomId}")]
+        public IActionResult GetRooms(int roomId)
         {
-            return Ok(_context.Users);
+            var room = _context.Rooms.FirstOrDefault(x => x.Id == roomId);
+            if (room == null)
+                return NotFound();
+            return Ok(room);
         }
-        [HttpGet("Users")]
-        public IActionResult GetUsersInRoom([FromQuery] int? id)
+        [HttpGet("{roomId}/Users")]
+        public IActionResult GetUsersInRoom(int roomId)
         {
-            if(_context.Rooms.FirstOrDefault(x => x.Id == id) == null) return BadRequest();
-            var users=_context.UserRooms.Where(x => x.RoomId == id).Select(x=>x.UserId);
+            if(_context.Rooms.FirstOrDefault(x => x.Id == roomId) == null) 
+                return NotFound();
+            var users=_context.UserRooms.Where(x => x.RoomId == roomId).Select(x=>x.UserId);
             return Ok(_context.Users.Where(x=>users.Contains(x.Id)));
         }
-        [HttpGet("History")]
-        public IActionResult GetRoomHistory([FromQuery] int id)
+        [HttpGet("{roomId}/History")]
+        public IActionResult GetRoomHistory(int roomId)
         {
-            return Ok(_context.SavedTexts.Where(x=>x.RoomId==id));
+            if(_context.Rooms.FirstOrDefault(x=>x.Id == roomId) == null) 
+                return NotFound();
+            return Ok(_context.SavedTexts.Where(x=>x.RoomId== roomId));
         }
-        [HttpPost("Create")]
-        public IActionResult CreateRoom([FromBody]RoomRequest request)
+        [HttpGet("{roomId}/Backup")]
+        public IActionResult GetTextBackup(int roomId, [FromQuery] int version)
         {
-            var handler = new JwtSecurityTokenHandler();
-            var token = handler.ReadJwtToken(request.Token);
-            var userId = int.Parse(token.Claims.First(x => x.Type == "Id").Value);
-            Room newRoom;
-            if(request.Password==null) newRoom= new Room(request.Name, null, userId);
-            else newRoom=new Room(request.Name,AuthController.GetHash( request.Password), userId);
+            var room = _context.Rooms.FirstOrDefault(x => x.Id == roomId);
+            if (room == null) 
+                return NotFound();
+            var saves = _context.SavedTexts.Where(x => x.RoomId == room.Id).ToArray();
+            if (version<0 || version>saves.Length)
+                return BadRequest();
+            var result= RoomService.GetTextVersion(room,saves , version);
+            return Ok(result);
+        }
+        [Authorize, HttpPost("Create")]
+        public IActionResult CreateRoom([FromBody] CreateRoomDto request)
+        {
+            var userId = AuthService.GetUserId(Request.Headers.Authorization!);
+            Room newRoom = new Room(request.Name,AuthService.GetHash(request.Password), userId);
             _context.Rooms.Add(newRoom);
             _context.SaveChanges();
             _context.UserRooms.Add(new UserRoom(userId, newRoom.Id));
             _context.SaveChanges();
-            return CreatedAtAction(null, new {newRoom.Id}, newRoom);
+            return CreatedAtAction(nameof(GetRooms), new { newRoom.Id }, newRoom);
         }
-        [HttpPut("Enter")]
-        public IActionResult EnterRoom([FromBody] RoomRequest request)
+        [Authorize,HttpPut("{roomId}/Backup")]
+        public IActionResult DoTextBackup(int roomId, [FromQuery]int version)
         {
-            var handler = new JwtSecurityTokenHandler();
-            var token = handler.ReadJwtToken(request.Token);
-            var userId = int.Parse(token.Claims.First(x => x.Type == "Id").Value);
-            var room = _context.Rooms.FirstOrDefault(x => x.Id == request.Id);
-            if (room==null) return BadRequest();
-            if(request.Password!=null && room.Password!=AuthController.GetHash(request.Password)) return Forbid();
-            if(_context.UserRooms.FirstOrDefault(x=>x.UserId==userId && x.RoomId==room.Id) != null) return BadRequest();
-            _context.UserRooms.Add(new UserRoom(userId, request.Id));
+            var room = _context.Rooms.FirstOrDefault(x => x.Id == roomId);
+            if(room == null) 
+                return NotFound();
+            var saves = _context.SavedTexts.Where(x => x.RoomId == room.Id).ToArray();
+            if (version < 0 || version > saves.Length)
+                return BadRequest();
+            var userId = AuthService.GetUserId(Request.Headers.Authorization!);
+            if (room.CreatorId != userId)
+                return Forbid();
+            string result=RoomService.GetTextVersion(room, saves,version);
+            room.Text = result;
+            _context.SavedTexts.Add(new SavedText(room.Id, 0, room.Text, "delete", room.CreatorId, DateTime.UtcNow));
+            _context.SavedTexts.Add(new SavedText(room.Id, 0, result, "add", room.CreatorId, DateTime.UtcNow));
+            _context.SaveChanges();
+            return Ok(new SavedText(room.Id, 0, result, "add", room.CreatorId, DateTime.UtcNow));
+        }
+        [Authorize,HttpPut("{roomId}/Enter")]
+        public IActionResult EnterRoom(int roomId, [FromBody] EnterRoomDto request)
+        {
+            var userId = AuthService.GetUserId(Request.Headers.Authorization!);
+            var room = _context.Rooms.FirstOrDefault(x => x.Id == roomId);
+            if (room==null) 
+                return NotFound();
+            if(request.Password!=null && room.Password!=AuthService.GetHash(request.Password))
+                return Forbid();
+            if(_context.UserRooms.FirstOrDefault(x=>x.UserId==userId && x.RoomId==room.Id) != null) 
+                return BadRequest();
+            _context.UserRooms.Add(new UserRoom(userId, roomId));
             _context.SaveChanges();
             return NoContent();
         }
-        [HttpPut("Exit")]
-        public IActionResult ExitRoom([FromBody] RoomRequest request)
+        [Authorize,HttpPut("{roomId}/Exit")]
+        public IActionResult ExitRoom(int roomId)
         {
-            var handler = new JwtSecurityTokenHandler();
-            var token = handler.ReadJwtToken(request.Token);
-            var userId = int.Parse(token.Claims.First(x => x.Type == "Id").Value);
-            var room = _context.Rooms.FirstOrDefault(x => x.Id == request.Id);
-            if (room == null) return BadRequest();
+            var userId = AuthService.GetUserId(Request.Headers.Authorization!);
+            var room = _context.Rooms.FirstOrDefault(x => x.Id == roomId);
+            if (room == null) return NotFound();
             var user = _context.UserRooms.FirstOrDefault(x => x.UserId == userId && x.RoomId == room.Id);
             if (user == null) return BadRequest();
             if (room.CreatorId == user.UserId)
@@ -85,24 +114,50 @@ namespace TextOnline.Controllers
             _context.SaveChanges();
             return NoContent();
         }
-        [HttpDelete("Delete")]
-        public IActionResult DeleteRoom([FromBody] RoomRequest request)
+        [Authorize,HttpPut("{roomId}/Kick")]
+        public IActionResult KickUser(int roomId,[FromQuery]int kickedUserId)
         {
-            var room=_context.Rooms.FirstOrDefault(x=>x.Id==request.Id);
+            var userId = AuthService.GetUserId(Request.Headers.Authorization!);
+            var room = _context.Rooms.FirstOrDefault(x => x.Id == roomId);
+            Console.WriteLine(kickedUserId+" "+ roomId);
+            var kickedUser = _context.UserRooms.FirstOrDefault(x => x.UserId == kickedUserId && x.RoomId==roomId);
+            if (room == null || kickedUser==null) return NotFound();
+            var user = _context.Users.FirstOrDefault(x => x.Id == userId);
+            if (user == null) return BadRequest();
+            if (room.CreatorId != user.Id)
+                return Forbid();
+            _context.UserRooms.Remove(kickedUser);
+            _context.SaveChanges();
+            return NoContent();
+        }
+        [Authorize,HttpPut("{roomId}/Settings")]
+        public IActionResult ChangeSettings(int roomId,[FromBody] CreateRoomDto request)
+        {
+            var userId = AuthService.GetUserId(Request.Headers.Authorization!);
+            var room = _context.Rooms.FirstOrDefault(x => x.Id == roomId);
+            var user = _context.Users.FirstOrDefault(x => x.Id == userId);
+            if (room == null) return NotFound();
+            if (user == null) return BadRequest();
+            if (room.CreatorId != user.Id) return Forbid();
+            if(request.Password != null)
+                room.Password = request.Password;
+            if (room.Name != null)
+                room.Name = request.Name;
+            _context.SaveChanges();
+            return Ok(room);
+        }
+        [Authorize, HttpDelete("{roomId}/Delete")]
+        public IActionResult DeleteRoom(int roomId)
+        {
+            var userId = AuthService.GetUserId(Request.Headers.Authorization!);
+            var room=_context.Rooms.FirstOrDefault(x=>x.Id==roomId);
             if (room==null)
-                return BadRequest();
-            if (!AuthController.CheckToken(request.Token,room.CreatorId))
+                return NotFound();
+            if(room.CreatorId != userId)
                 return Forbid();
             _context.Rooms.Remove(room);
             _context.SaveChanges();
             return Ok(room);
         }
-    }
-    public class RoomRequest
-    {
-        public string? Name { get; set; }
-        public int Id { get; set; }
-        public string? Password { get; set; }
-        public string Token { get; set; }
     }
 }

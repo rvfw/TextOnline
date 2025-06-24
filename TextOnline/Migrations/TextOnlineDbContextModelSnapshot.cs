@@ -59,7 +59,7 @@ namespace TextOnline.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("LastRedactorId")
+                    b.Property<int>("Position")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("RedactedTime")
@@ -71,6 +71,13 @@ namespace TextOnline.Migrations
                     b.Property<string>("Text")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<string>("TextEvent")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 

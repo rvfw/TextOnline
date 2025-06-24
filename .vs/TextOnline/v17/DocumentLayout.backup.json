@@ -7,10 +7,6 @@
       "RelativeMoniker": "D:0:0:{1E04B29B-FCB0-4197-842E-A553747F1BB1}|TextOnline\\TextOnline.csproj|solutionrelative:textonline\\controllers\\roomscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1E04B29B-FCB0-4197-842E-A553747F1BB1}|TextOnline\\TextOnline.csproj|d:\\other\\code\\textonline\\textonline\\models\\room.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1E04B29B-FCB0-4197-842E-A553747F1BB1}|TextOnline\\TextOnline.csproj|solutionrelative:textonline\\models\\room.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1E04B29B-FCB0-4197-842E-A553747F1BB1}|TextOnline\\TextOnline.csproj|d:\\other\\code\\textonline\\textonline\\models\\connection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1E04B29B-FCB0-4197-842E-A553747F1BB1}|TextOnline\\TextOnline.csproj|solutionrelative:textonline\\models\\connection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -19,8 +15,36 @@
       "RelativeMoniker": "D:0:0:{1E04B29B-FCB0-4197-842E-A553747F1BB1}|TextOnline\\TextOnline.csproj|solutionrelative:textonline\\controllers\\textcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{1E04B29B-FCB0-4197-842E-A553747F1BB1}|TextOnline\\TextOnline.csproj|d:\\other\\code\\textonline\\textonline\\dtos\\alldto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E04B29B-FCB0-4197-842E-A553747F1BB1}|TextOnline\\TextOnline.csproj|solutionrelative:textonline\\dtos\\alldto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E04B29B-FCB0-4197-842E-A553747F1BB1}|TextOnline\\TextOnline.csproj|d:\\other\\code\\textonline\\textonline\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E04B29B-FCB0-4197-842E-A553747F1BB1}|TextOnline\\TextOnline.csproj|solutionrelative:textonline\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E04B29B-FCB0-4197-842E-A553747F1BB1}|TextOnline\\TextOnline.csproj|d:\\other\\code\\textonline\\textonline\\services\\roomservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E04B29B-FCB0-4197-842E-A553747F1BB1}|TextOnline\\TextOnline.csproj|solutionrelative:textonline\\services\\roomservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E04B29B-FCB0-4197-842E-A553747F1BB1}|TextOnline\\TextOnline.csproj|d:\\other\\code\\textonline\\textonline\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E04B29B-FCB0-4197-842E-A553747F1BB1}|TextOnline\\TextOnline.csproj|solutionrelative:textonline\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E04B29B-FCB0-4197-842E-A553747F1BB1}|TextOnline\\TextOnline.csproj|d:\\other\\code\\textonline\\textonline\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E04B29B-FCB0-4197-842E-A553747F1BB1}|TextOnline\\TextOnline.csproj|solutionrelative:textonline\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E04B29B-FCB0-4197-842E-A553747F1BB1}|TextOnline\\TextOnline.csproj|d:\\other\\code\\textonline\\textonline\\models\\room.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E04B29B-FCB0-4197-842E-A553747F1BB1}|TextOnline\\TextOnline.csproj|solutionrelative:textonline\\models\\room.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{1E04B29B-FCB0-4197-842E-A553747F1BB1}|TextOnline\\TextOnline.csproj|d:\\other\\code\\textonline\\textonline\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1E04B29B-FCB0-4197-842E-A553747F1BB1}|TextOnline\\TextOnline.csproj|solutionrelative:textonline\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E04B29B-FCB0-4197-842E-A553747F1BB1}|TextOnline\\TextOnline.csproj|d:\\other\\code\\textonline\\textonline\\models\\savedtext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E04B29B-FCB0-4197-842E-A553747F1BB1}|TextOnline\\TextOnline.csproj|solutionrelative:textonline\\models\\savedtext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1E04B29B-FCB0-4197-842E-A553747F1BB1}|TextOnline\\TextOnline.csproj|d:\\other\\code\\textonline\\textonline\\models\\textonlinedbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -34,71 +58,147 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 11,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 7,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Other\\Code\\TextOnline\\TextOnline\\Program.cs",
+              "RelativeDocumentMoniker": "TextOnline\\Program.cs",
+              "ToolTip": "D:\\Other\\Code\\TextOnline\\TextOnline\\Program.cs",
+              "RelativeToolTip": "TextOnline\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T10:26:57.114Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "D:\\Other\\Code\\TextOnline\\TextOnline\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "TextOnline\\Controllers\\UsersController.cs",
+              "ToolTip": "D:\\Other\\Code\\TextOnline\\TextOnline\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "TextOnline\\Controllers\\UsersController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T09:58:33.899Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "Room.cs",
               "DocumentMoniker": "D:\\Other\\Code\\TextOnline\\TextOnline\\Models\\Room.cs",
               "RelativeDocumentMoniker": "TextOnline\\Models\\Room.cs",
               "ToolTip": "D:\\Other\\Code\\TextOnline\\TextOnline\\Models\\Room.cs",
               "RelativeToolTip": "TextOnline\\Models\\Room.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-17T15:13:27.72Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "D:\\Other\\Code\\TextOnline\\TextOnline\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "TextOnline\\Controllers\\AuthController.cs",
-              "ToolTip": "D:\\Other\\Code\\TextOnline\\TextOnline\\Controllers\\AuthController.cs",
-              "RelativeToolTip": "TextOnline\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAACUAAABZAAAAAAAAAA==",
+              "DocumentIndex": 10,
+              "Title": "SavedText.cs",
+              "DocumentMoniker": "D:\\Other\\Code\\TextOnline\\TextOnline\\Models\\SavedText.cs",
+              "RelativeDocumentMoniker": "TextOnline\\Models\\SavedText.cs",
+              "ToolTip": "D:\\Other\\Code\\TextOnline\\TextOnline\\Models\\SavedText.cs",
+              "RelativeToolTip": "TextOnline\\Models\\SavedText.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T14:51:50.952Z",
+              "WhenOpened": "2025-06-18T15:18:01.391Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AllDto.cs",
+              "DocumentMoniker": "D:\\Other\\Code\\TextOnline\\TextOnline\\Dtos\\AllDto.cs",
+              "RelativeDocumentMoniker": "TextOnline\\Dtos\\AllDto.cs",
+              "ToolTip": "D:\\Other\\Code\\TextOnline\\TextOnline\\Dtos\\AllDto.cs",
+              "RelativeToolTip": "TextOnline\\Dtos\\AllDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwBQAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T10:23:00.339Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "D:\\Other\\Code\\TextOnline\\TextOnline\\Services\\AuthService.cs",
+              "RelativeDocumentMoniker": "TextOnline\\Services\\AuthService.cs",
+              "ToolTip": "D:\\Other\\Code\\TextOnline\\TextOnline\\Services\\AuthService.cs",
+              "RelativeToolTip": "TextOnline\\Services\\AuthService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-22T12:51:49.54Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
+              "Title": "RoomService.cs",
+              "DocumentMoniker": "D:\\Other\\Code\\TextOnline\\TextOnline\\Services\\RoomService.cs",
+              "RelativeDocumentMoniker": "TextOnline\\Services\\RoomService.cs",
+              "ToolTip": "D:\\Other\\Code\\TextOnline\\TextOnline\\Services\\RoomService.cs",
+              "RelativeToolTip": "TextOnline\\Services\\RoomService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-20T13:49:05.28Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
               "Title": "TextOnlineDbContext.cs",
               "DocumentMoniker": "D:\\Other\\Code\\TextOnline\\TextOnline\\Models\\TextOnlineDbContext.cs",
               "RelativeDocumentMoniker": "TextOnline\\Models\\TextOnlineDbContext.cs",
               "ToolTip": "D:\\Other\\Code\\TextOnline\\TextOnline\\Models\\TextOnlineDbContext.cs",
               "RelativeToolTip": "TextOnline\\Models\\TextOnlineDbContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAqAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T14:47:03.363Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-17T14:47:03.363Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Connection.cs",
               "DocumentMoniker": "D:\\Other\\Code\\TextOnline\\TextOnline\\Models\\Connection.cs",
               "RelativeDocumentMoniker": "TextOnline\\Models\\Connection.cs",
               "ToolTip": "D:\\Other\\Code\\TextOnline\\TextOnline\\Models\\Connection.cs",
               "RelativeToolTip": "TextOnline\\Models\\Connection.cs",
-              "ViewState": "AgIAADUAAAAAAAAAAAAwwEIAAAAxAAAAAAAAAA==",
+              "ViewState": "AgIAAFUAAAAAAAAAAAAcwGMAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-16T16:46:31.802Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "TextController.cs",
               "DocumentMoniker": "D:\\Other\\Code\\TextOnline\\TextOnline\\Controllers\\TextController.cs",
               "RelativeDocumentMoniker": "TextOnline\\Controllers\\TextController.cs",
               "ToolTip": "D:\\Other\\Code\\TextOnline\\TextOnline\\Controllers\\TextController.cs",
               "RelativeToolTip": "TextOnline\\Controllers\\TextController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAcAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-16T11:05:44.438Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "D:\\Other\\Code\\TextOnline\\TextOnline\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "TextOnline\\Controllers\\AuthController.cs",
+              "ToolTip": "D:\\Other\\Code\\TextOnline\\TextOnline\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "TextOnline\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADwAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-17T14:51:50.952Z",
               "EditorCaption": ""
             },
             {
@@ -109,7 +209,7 @@
               "RelativeDocumentMoniker": "TextOnline\\Controllers\\RoomsController.cs",
               "ToolTip": "D:\\Other\\Code\\TextOnline\\TextOnline\\Controllers\\RoomsController.cs*",
               "RelativeToolTip": "TextOnline\\Controllers\\RoomsController.cs*",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAQwCgAAABAAAAAAAAAAA==",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAkwHkAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-15T12:37:22.983Z",
               "EditorCaption": ""

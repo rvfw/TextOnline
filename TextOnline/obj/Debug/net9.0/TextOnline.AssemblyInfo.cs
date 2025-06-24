@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TextOnline")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+762cba669df5916d788f87afdc87527ddcd4d0fc")]
 [assembly: System.Reflection.AssemblyProductAttribute("TextOnline")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TextOnline")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

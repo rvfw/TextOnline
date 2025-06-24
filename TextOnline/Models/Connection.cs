@@ -3,7 +3,6 @@ using System.Net.WebSockets;
 using System.Text.Json;
 using System.Text;
 using TextOnline.Controllers;
-using Microsoft.AspNetCore.SignalR;
 
 namespace TextOnline.Models
 {
@@ -24,16 +23,7 @@ namespace TextOnline.Models
             var receiveResult = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
             while (!receiveResult.CloseStatus.HasValue)
             {
-                var request = Encoding.UTF8.GetString(buffer, 0, receiveResult.Count);
-                var dict=JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(request);
-                switch (dict["event"].ToString())
-                {
-                    case "login": await LoginRoom(dict); break; //"event":"login", "room_id":1, "token":"jwt"
-                    case "add_text": await AddText(dict); break; //"event":"add_text", "new_text":"abcd", "position":13
-                    case "delete_text": await DeleteText(dict); break; //"event":"delete_text", "length":15, "position":13
-                    case "move_cursor": await MoveCursor(dict); break; //"event":"move_cursor", "new_position":12
-                    default: await Responce(webSocket, "Error", "Bad Request"); break;
-                }
+                await ProcessRequest(buffer, receiveResult);
                 receiveResult = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
             }
             connectionRooms[room.Id].Remove(this);
@@ -42,7 +32,22 @@ namespace TextOnline.Models
                 receiveResult.CloseStatusDescription,
                 CancellationToken.None);
         }
-        async Task LoginRoom(Dictionary<string, JsonElement> dict)
+        private async Task ProcessRequest(byte[]? buffer,WebSocketReceiveResult receiveResult)
+        {
+            var request = Encoding.UTF8.GetString(buffer, 0, receiveResult.Count);
+            Dictionary<string, JsonElement> dict;
+            try { dict = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(request); }
+            catch { await Responce(webSocket, "Error", "Wrong JSON"); return; }
+            switch (dict["event"].ToString())
+            {
+                case "login": await LoginRoom(dict); break; //"event":"login", "room_id":1, "token":"jwt"
+                case "add_text": await AddText(dict); break; //"event":"add_text", "new_text":"abcd", "position":13
+                case "delete_text": await DeleteText(dict); break; //"event":"delete_text", "length":15, "position":13
+                case "move_cursor": await MoveCursor(dict); break; //"event":"move_cursor", "new_position":12
+                default: await Responce(webSocket, "Error", "Bad Request"); break;
+            }
+        }
+        private async Task LoginRoom(Dictionary<string, JsonElement> dict)
         {
             int roomId = dict["room_id"].GetInt32();
             room=TextController.context.Rooms.FirstOrDefault(x => x.Id == roomId);
@@ -60,48 +65,61 @@ namespace TextOnline.Models
                 await Responce(webSocket, "Success", TextController.context.Rooms.FirstOrDefault(x => x.Id == roomId).Text);
             }
         }
-        async Task AddText(Dictionary<string, JsonElement> dict)
+        private async Task AddText(Dictionary<string, JsonElement> dict)
         {
-            room.Text=room.Text.Insert(dict["position"].GetInt32(), dict["new_text"].ToString());
-            TextController.context.SavedTexts.Add(new SavedText(room.Id,room.Text, userId, DateTime.UtcNow));
-            TextController.context.SaveChanges();
+            var position = dict["position"].GetInt32();
+            string newText = dict["new_text"].ToString();
+            try { room.Text = room.Text.Insert(position, newText); }
+            catch { await Responce(webSocket, "Error", "Wrong Add"); return; }
+            CreateNewSave(position, newText,"add");
             foreach (var user in connectionRooms[room.Id])
             {
                 await Responce(user.webSocket, "Text Updated", room.Text);
                 if(user.cursorPos>= dict["position"].GetInt32())
                     user.cursorPos += dict["new_text"].ToString().Length;
             }
-            foreach (var user in connectionRooms[room.Id])
-                foreach (var anotherUserCursor in connectionRooms[room.Id])
-                    await Responce(user.webSocket, $"Cursor {anotherUserCursor.userId} Moved", anotherUserCursor.cursorPos + "");
+            await MoveUsersCursor();
         }
-        async Task DeleteText(Dictionary<string, JsonElement> dict)
+        private async Task DeleteText(Dictionary<string, JsonElement> dict)
         {
-            int pos = dict["position"].GetInt32();
-            int len = dict["length"].GetInt32();
-            room.Text = room.Text.Remove(pos, len);
-            TextController.context.SavedTexts.Add(new SavedText(room.Id, room.Text, userId, DateTime.UtcNow));
-            TextController.context.SaveChanges();
+            int position = dict["position"].GetInt32();
+            int length = dict["length"].GetInt32();
+            string deletedText;
+            try { deletedText = room.Text.Substring(position, length); }
+            catch { await Responce(webSocket, "Error", "Wrong Delete"); return; }
+            room.Text = room.Text.Remove(position, length);
+            CreateNewSave(position, deletedText, "delete");
             foreach (var user in connectionRooms[room.Id])
             {
                 await Responce(user.webSocket, "Text Updated", room.Text);
-                if(user.cursorPos>= pos+len)
-                    user.cursorPos -= len;
-                else if(user.cursorPos >= pos)
-                    user.cursorPos = pos;
+                if(user.cursorPos>= position + length)
+                    user.cursorPos -= length;
+                else if(user.cursorPos >= position)
+                    user.cursorPos = position;
             }
+            await MoveUsersCursor();
+        }
+        private void CreateNewSave(int position, string editedText, string textEvent)
+        {
+            TextController.context.SavedTexts.Add(new SavedText(room.Id, position, editedText, textEvent, userId, DateTime.UtcNow));
+            TextController.context.SaveChanges();
+        }
+        private async Task MoveUsersCursor()
+        {
             foreach (var user in connectionRooms[room.Id])
                 foreach (var anotherUserCursor in connectionRooms[room.Id])
                     await Responce(user.webSocket, $"Cursor {anotherUserCursor.userId} Moved", anotherUserCursor.cursorPos + "");
         }
-        async Task MoveCursor(Dictionary<string, JsonElement> dict)
+        private async Task MoveCursor(Dictionary<string, JsonElement> dict)
         {
-            cursorPos=dict["new_position"].GetInt32();
             if (cursorPos < 0 || cursorPos > room.Text.Length)
                 await Responce(webSocket, "Error", "Wrong Position");
             else
+            {
+                cursorPos = dict["new_position"].GetInt32();
                 foreach (var user in connectionRooms[room.Id])
                     await Responce(user.webSocket, $"Cursor {userId} Moved", cursorPos + "");
+            }
         }
         private async Task Responce(WebSocket ws, string type, string text)
         {

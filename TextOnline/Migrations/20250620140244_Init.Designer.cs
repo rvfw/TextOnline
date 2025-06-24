@@ -12,7 +12,7 @@ using TextOnline.Models;
 namespace TextOnline.Migrations
 {
     [DbContext(typeof(TextOnlineDbContext))]
-    [Migration("20250617145016_Init")]
+    [Migration("20250620140244_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -62,7 +62,7 @@ namespace TextOnline.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("LastRedactorId")
+                    b.Property<int>("Position")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("RedactedTime")
@@ -74,6 +74,13 @@ namespace TextOnline.Migrations
                     b.Property<string>("Text")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<string>("TextEvent")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
